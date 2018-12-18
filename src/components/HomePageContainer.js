@@ -1,10 +1,10 @@
 import React from 'react'
 import Nav from './Nav'
-import Login from './Login'
+import Signup from './Signup'
 
 export default class HomePageContainer extends React.Component{
   state={
-    logClick: false
+    logClick: false,
   }
 
   handleLogClick = (e) => {
@@ -15,11 +15,12 @@ export default class HomePageContainer extends React.Component{
   }
 
   render(){
+    console.log("container", this.props.user)
     return (
       <div>
-        <Nav handleLogClick={this.handleLogClick} />
-        <h1>MainPage w Title</h1>
-        {this.state.logClick && <Login SignupSubmit={this.props.signupSubmit} />}
+        <Nav handleLogClick={this.handleLogClick} user={this.props.user} />
+        <center><img alt="" className="header" src="https://images.cooltext.com/5233365.png" /></center>
+        {this.state.logClick && <Signup loginHandler={this.props.loginHandler} SignupSubmit={this.props.signupSubmit} />}
       </div>
     )
   }
