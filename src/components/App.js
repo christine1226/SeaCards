@@ -16,28 +16,24 @@ class App extends Component {
   }
 
   onclick = (e) => {
-    console.log(e.target.alt)
-    fetch('http://localhost:3003/flashcard')
-    .then(res => res.json())
-    .then(act =>
-      this.setState({
-      activity: act
-    }))
-    this.props.history.push('/flashcard')
-
+    if(e.target.alt === 'spelling'){
+      fetch('http://localhost:3003/flashcard')
+      .then(res => res.json())
+      .then(act =>
+        this.setState({
+        activity: act
+      }))
+      this.props.history.push('/flashcard')
+    } else {
+      alert('...Working on it 😫')
+    }
   }
-
-  // game = () => {
-  //   let idx = Math.floor(Math.random() * this.state.activity.length);
-  //   let game = this.state.activity[idx];
-  //   return game
-  // }
-
 
   componentDidMount = () => {
   let token = localStorage.getItem('token')
   if (token){
     fetch('http://localhost:3000/api/v1/current_user/', {
+      method: 'GET',
       headers: {
         "Content-Type": "application/json",
         Accepts: "application/json",
@@ -46,7 +42,7 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(resp => this.setState({
-      user: resp
+      user: resp.user
     }))
     this.props.history.push('/activity')
   } else {
@@ -71,11 +67,32 @@ signupSubmit = (e, userObj) => {
   })
   .then(res => res.json())
   .then(user =>
-    {localStorage.setItem('token', user.user.id)
+    {localStorage.setItem('token', user.jwt)
     this.setState({
       user: user.user
-  }, this.componentDidMount(user))}
+  }, this.componentDidMount())}
   )
+}
+
+login = (e, userInfo) => {
+fetch('http://localhost:3000/api/v1/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accepts': 'application/json'
+  },
+  body: JSON.stringify({
+    user: userInfo
+  })
+})
+  .then(res => res.json())
+  .then(user => {
+    localStorage.setItem('token', user.jwt)
+    this.setState({
+      user: user.user
+    })
+  })
+  this.props.history.push('/activity')
 }
 
   render() {
