@@ -16,6 +16,7 @@ class App extends Component {
   }
 
   onclick = (e) => {
+
     if(e.target.alt === 'spelling'){
       fetch('http://localhost:3003/flashcard')
       .then(res => res.json())
@@ -28,6 +29,7 @@ class App extends Component {
       alert('...Working on it 😫')
     }
   }
+
 
   componentDidMount = () => {
   let token = localStorage.getItem('token')
@@ -42,8 +44,8 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(resp => this.setState({
-      user: resp.user
-    }))
+      user: resp
+    }, console.log(resp)))
     this.props.history.push('/activity')
   } else {
     this.props.history.push('/homepage')
@@ -102,7 +104,7 @@ fetch('http://localhost:3000/api/v1/login', {
         <Switch>
           <Route path='/homepage' render={() => <HomePageContainer loginHandler={this.loginHandler} signupSubmit={this.signupSubmit}  />}/>
           <Route path='/activity' render={() => <ActivitiesContainer user={this.state.user} onclick={this.onclick} />}/>
-          <Route path='/flashcard' render={() => <Flashcard user={this.state.user} activity={this.state.activity} />}/>
+          <Route path='/flashcard' render={() => <Flashcard user={this.state.user} activity={this.state.activity} submitScore={this.submitScore} />}/>
         </Switch>
       </div>
     )

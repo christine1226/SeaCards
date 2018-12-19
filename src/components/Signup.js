@@ -27,7 +27,7 @@ export default class Signup extends React.Component{
     if(this.state.click === false){
       return(
         <form onSubmit={(e) => this.props.SignupSubmit(e, this.state)}>
-        <div class="ui segment">
+        <div class="ui segment first">
           <div className="form" class="ui form">
           <h1>Signup</h1>
             <div class="field">

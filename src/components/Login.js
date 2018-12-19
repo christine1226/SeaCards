@@ -16,7 +16,7 @@ class Login extends React.Component{
   render(){
     return(
       <form onSubmit={(e)=> this.props.loginHandler(e, this.state)}>
-      <div className="form" class="ui segment">
+      <div className="form" class="ui segment first">
         <div class="ui form">
         <h1>Login</h1>
           <div class="field">

@@ -2,8 +2,8 @@
 background: url('http://forum.videohelp.com/attachments/30382-1424562164/Bubbles3.gif');
 background-size: cover;
 background-repeat: no-repeat;
-height: 850px;
-width: 1200px;
+height: 920px;
+width: 1650px;
 float: left;
 padding: none;
 display: fixed;
@@ -24,6 +24,7 @@ li{
 li a {
   display: inline-block;
   padding: 5px 16px;
+  margin-right: 60px;
 }
 .log{
   float: right;
@@ -43,8 +44,9 @@ li a {
   opacity: 0.6;
 }
 .main-wrap{
-  width: 70%;
-  margin-top: -5%;
+  width: 100%;
+  margin-top: -8%;
+  margin-left: 2%;
 }
 .ui.stackable.cards{
   margin-top: 25%;
@@ -52,17 +54,73 @@ li a {
 }
 .game-card{
   align: center;
-  height: 60%;
-  width:60%;
+  width: 60%;
   background-color: white;
-  padding: 10%;
+  padding: 7%;
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 2%;
   margin-right: 30%;
   border-radius: 5%;
   border-color: #f4d64e;
   border-style: groove;
 }
 .game-card img {
-  box-shadow: grey 5px 5px 7px;
+  position: center;
+  box-shadow: grey 5px 5px 1px;
+}
+.score-card{
+  float: right;
+  padding: 4%;
+  margin-right: 10%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://vignette.wikia.nocookie.net/clubpenguin/images/4/48/Quest_item_Treasure_Map_icon.png/revision/latest?cb=20170319204335')
+}
+.score-card h3{
+  color: white;
+  margin-left: 20%;
+  font-size: 50px;
+  text-shadow: #f4d64e 1px 1px 5px;
+}
+.collection{
+  margin-top: 5%;
+  max-width: 70%;
+}
+.pick{
+  padding: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  color: white;
+  text-shadow: grey 1px 1px 5px
+}
+/* .user{
+  float: right;
+  padding-left: 4%;
+  padding-bottom: 10%;
+  margin-right: 20%;
+  margin-bottom: 10%;
+  height: 200px;
+  background-color: white;
+  background-image: url('https://vignette.wikia.nocookie.net/clubpenguin/images/4/48/Quest_item_Treasure_Map_icon.png/revision/latest?cb=20170319204335')
+} */
+
+.ui.segment.second{
+  /* box-shadow: grey 3px 3px 8px; */
+  border: solid;
+  border-color: #f4d64e;
+}
+
+.ui.segment.first{
+  max-width: 40%;
+  margin: 30%
+}
+.ui.yellow.button{
+  display: inline-block;
+  margin: 2px;
+  margin-top: 10px;
+}
+.ui.yellow.button.second{
+  display: inline-block;
+  margin: 5px;
+
 }
