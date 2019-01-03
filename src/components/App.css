@@ -28,7 +28,9 @@ li a {
 }
 .log{
   float: right;
+  padding-right: 40px;
 }
+
 .header{
   margin-bottom: 2%;
 }
@@ -68,6 +70,31 @@ li a {
   position: center;
   box-shadow: grey 5px 5px 1px;
 }
+
+.user{
+  float: right;
+  padding: 4%;
+  margin-left: 2%;
+  margin-right: 10%;
+  margin-top: 4%;
+  border: solid;
+  border-color: #f4d64e;
+  background-color: white;
+  border-radius: 5%;
+}
+.user h2{
+  text-align: center;
+  border: solid;
+  border-color: #f4d64e;
+  border-radius: 5%;
+  padding: 10px;
+}
+.user img{
+  border: solid;
+  border-color: #f4d64e;
+  border-radius: 5%;
+}
+
 .score-card{
   float: right;
   padding: 4%;
@@ -91,23 +118,14 @@ li a {
   font-family: 'Open Sans', sans-serif;
   font-size: 40px;
   color: white;
-  text-shadow: grey 1px 1px 5px
+  text-shadow: black 3px 3px 5px
 }
-/* .user{
-  float: right;
-  padding-left: 4%;
-  padding-bottom: 10%;
-  margin-right: 20%;
-  margin-bottom: 10%;
-  height: 200px;
-  background-color: white;
-  background-image: url('https://vignette.wikia.nocookie.net/clubpenguin/images/4/48/Quest_item_Treasure_Map_icon.png/revision/latest?cb=20170319204335')
-} */
 
 .ui.segment.second{
   /* box-shadow: grey 3px 3px 8px; */
   border: solid;
   border-color: #f4d64e;
+  border-radius: 5%;
 }
 
 .ui.segment.first{
@@ -122,5 +140,37 @@ li a {
 .ui.yellow.button.second{
   display: inline-block;
   margin: 5px;
-
+}
+.parent-portal{
+  padding-left: 450px;
+}
+.portal-container{
+  width: 1300px;
+  height: 800px;
+  margin-top: 25px;
+  margin-bottom: 45px;
+  margin-left: 140px;
+  margin-right: 140px;
+  background-color: white;
+  opacity: 0.7;
+  text-align: center;
+}
+.portal-option a{
+  padding-top: 250px;
+  margin-top: 400px;
+  padding-left: 11px;
+  padding-right: 50px;
+  display: inline-block;
+}
+.left{
+  float: left;
+  text-align: left;
+  margin-top: 90px;
+  margin-left: 350px;
+}
+.right{
+  float: right;
+  margin-top: 90px;
+  margin-right: 350px;
+  text-align: left;
 }

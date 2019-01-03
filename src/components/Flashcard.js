@@ -2,6 +2,8 @@ import React from 'react'
 import Nav from './Nav'
 import Score from './Score'
 import { withRouter } from 'react-router-dom'
+import { getFlashcard } from '../store/action/flashCardAction'
+import { connect } from 'react-redux'
 
 class Flashcard extends React.Component{
   state={
@@ -9,11 +11,15 @@ class Flashcard extends React.Component{
     wrong: 0,
     input: React.createRef()
   }
+  componentDidMount = () => {
+    this.props.getFlashcard()
+  }
 
 
   handleInput = (e) => {
     e.preventDefault()
     let all = this.props.activity.map(word => word.question.toLowerCase())
+    console.log(all)
     if (all.includes(this.state.input.current.value.toLowerCase())){
       this.setState({
         score: Number(this.state.score)+10
@@ -80,9 +86,10 @@ class Flashcard extends React.Component{
         score:
         {
           activity_id: res.activity_id,
+          activity_name: res.activity_name,
           wrong_answer: this.state.wrong,
           correct_answer: this.state.score,
-          user_id: this.props.user.user_id
+          user_id: this.props.user.parent_email
         }
       })
     })
@@ -98,16 +105,16 @@ class Flashcard extends React.Component{
   render(){
     let idx = Math.floor(Math.random() * this.props.activity.length);
     let game = this.props.activity[idx];
-    console.log(this.state.wrong)
-    // {this.speak(`spell ${game ? game.question : " "}`)}
-    return(
+    console.log(this.props.user)
 
+
+    return(
       <div>
         <Nav user={this.props.user} />
         <div className='activity'>
           <Score score={this.state.score} />
           <div className="game-card">
-          <center><img img height='400px' width='400px' src={game ? game.img_url : null} /></center>
+          <center><img img height='400px' width='400px' src={game ? game.img_url : null } /></center>
           {game ? this.speak(`spell ${game.question}`) : 'null'}
           <center><h1>{game ? game.question : null}</h1></center>
           <center><form  onSubmit={this.handleInput} >
@@ -123,9 +130,15 @@ class Flashcard extends React.Component{
     )
   }
 }
-export default withRouter(Flashcard)
 
 
-// <img src={this.props.activity.map(res => {
-//   return res.img_url
-// })} />
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getFlashcard: () => dispatch((dispatch) => (getFlashcard(dispatch)))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return  {user: state.user.user, activity: state.activity.activity}
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Flashcard))

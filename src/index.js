@@ -3,20 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker'
-import { createStore, applyMiddleware } from 'redux'
-import reducer from './reducer/reducer'
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import userReducer from './store/reducer/userReducer'
+import flashCardReducer from './store/reducer/flashCardReducer'
+
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk'
 
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const rootReducer = combineReducers({
+  user: userReducer,
+  activity: flashCardReducer
+})
+
+
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
       <App />
-    </BrowserRouter>
   </Provider>
   , document.getElementById('root'));
 

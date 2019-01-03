@@ -1,37 +1,47 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { loginUser } from '../store/action/userAction'
+import { Link } from 'react-router-dom'
+
 
 class Login extends React.Component{
-  state={
-    parentEmail: '',
-    password: ''
+
+  login = (event) => {
+    event.preventDefault()
+    this.props.loginUser(event)
+    this.props.history.push('/activity')
   }
 
-  onChange = (e) => {
-    e.preventDefault()
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+
 
   render(){
     return(
-      <form onSubmit={(e)=> this.props.loginHandler(e, this.state)}>
-      <div className="form" class="ui segment first">
-        <div class="ui form">
+      <form onSubmit={this.login}>
+      <div className="form" className="ui segment first">
+        <div className="ui form">
         <h1>Login</h1>
-          <div class="field">
+          <div className="field">
             <label>Parent E-mail</label>
-            <input placeholder="Parent E-mail" name="parentEmail" type="text" value={this.state.parentEmail} onChange={this.onChange}/>
+            <input placeholder="Parent E-mail" name="parentEmail" type="text"  />
           </div>
-            <div class="field">
+            <div className="field">
               <label>Password</label>
-              <input placeholder="Password" name="password" type="password" value={this.state.password} onChange={this.onChange}/>
+              <input placeholder="Password" name="password" type="password"  />
             </div>
-              <button type="submit" class="ui submit button">Submit</button>
+              <button type="submit" className="ui submit button">Submit</button>
           </div>
         </div>
       </form>
     )
   }
 }
-export default Login
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (event) => dispatch(() => (loginUser(dispatch, event)))
+  }
+}
+
+
+export default withRouter(connect(null, mapDispatchToProps)(Login))
