@@ -1,4 +1,4 @@
-#Sea Learner
+**Sea Learner**
 
 This project is created by [Christine Gomez](https://www.linkedin.com/in/christine-gomez/).
 
@@ -8,7 +8,7 @@ Sea Learner users React/Redux for its frontend and uses Ruby on Rails for its ba
 
 Sea Learner is a childrens app designed for a child to become familiar with using a keyboard and pronouncing words. It tests a childs ability to identify colors, shapes, numbers, etc.
 
-##Running The Application
+**Running The Application**
 - First, you'll want to clone this repository along with the [backend](https://github.com/christine1226/SeaCardBackend).
 - Next, you'll have to run an `npm install`
 - Make sure to run  `bundle install` and  `rails db:migrate` in the backend
