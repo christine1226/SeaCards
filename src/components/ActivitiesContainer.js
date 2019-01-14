@@ -2,7 +2,6 @@ import React from 'react'
 import Nav from './Nav'
 import ActivityCollection from './ActivityCollection'
 import UserInfo from './UserInfo'
-import Score from './Score'
 import { connect } from 'react-redux'
 import { getCurrentUser} from '../store/action/userAction'
 import { withRouter } from 'react-router-dom'
@@ -14,6 +13,9 @@ class ActivitiesContainer extends React.Component{
     let token = localStorage.getItem('token')
     if (token){
       this.props.getCurrentUser(token)
+      this.props.history.push('/activity')
+    } else {
+      this.props.history.push('/homepage')
     }
   }
 
@@ -22,17 +24,15 @@ class ActivitiesContainer extends React.Component{
   if(e.target.alt === 'spelling'){
     this.props.history.push('/flashcard')
   } else if(e.target.alt === 'numbers') {
-    console.log('numbers')
     e.preventDefault()
     this.props.history.push('/number')
   } else if(e.target.alt === 'speech'){
-    console.log('speech')
     this.props.history.push('/speech')
   }
 }
 
   render(){
-    console.log(this.props.activity)
+    console.log(localStorage, this.props.user)
     return(
       <div>
 

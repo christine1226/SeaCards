@@ -4,6 +4,7 @@ import Score from './Score'
 import { getSpeechFlashcard } from '../store/action/flashCardAction'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getCurrentUser} from '../store/action/userAction'
 
 class SpeechFlashcard extends React.Component{
   state={
@@ -12,7 +13,13 @@ class SpeechFlashcard extends React.Component{
   }
 
   componentDidMount = () => {
-    this.props.getSpeechFlashcard()
+    let token = localStorage.getItem('token')
+    if (token){
+      // this.props.getCurrentUser(token)
+      this.props.getSpeechFlashcard()
+    } else {
+      this.props.history.push('/homepage')
+    }
   }
 
   click = () => {
@@ -136,7 +143,7 @@ class SpeechFlashcard extends React.Component{
         <center><p>{game ? game.question : null }</p></center>
         {game ? this.speak(game.question) : 'null'}
         <center>
-        <button onClick={this.listen}>Speak</button>
+        <button class="ui green button" onClick={this.listen}>Speak</button>
         <br />
         <button onClick={this.finish} class="ui yellow button" type="submit" >Submit</button>
         </center>
@@ -151,11 +158,13 @@ class SpeechFlashcard extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      getSpeechFlashcard: () => dispatch((dispatch) => (getSpeechFlashcard(dispatch)))
+    getCurrentUser: () => dispatch((token)=>(getCurrentUser(dispatch, token))),
+    getSpeechFlashcard: () => dispatch((dispatch) => (getSpeechFlashcard(dispatch)))
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log("state")
   return  {user: state.user, activity: state.activity.activity}
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpeechFlashcard))

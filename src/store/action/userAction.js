@@ -3,7 +3,12 @@ const loginHandler = (user) => ({
   payload: user
 })
 
-export const signupHandler = (user) => ({
+export const signupHandler = () => ({
+  type: 'CLEAR_USER',
+  payload: 'none'
+})
+
+export const clearUser = (user) => ({
   type: 'SIGN_UP_USER',
   payload: user
 })

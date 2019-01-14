@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { loginUser } from '../store/action/userAction'
-import { Link } from 'react-router-dom'
+
 
 
 class Login extends React.Component{
@@ -10,7 +10,12 @@ class Login extends React.Component{
   login = (event) => {
     event.preventDefault()
     this.props.loginUser(event)
+    let token = localStorage.getItem('token')
+    if(token){
     this.props.history.push('/activity')
+  } else{
+    this.props.history.push('/homepage')
+  }
   }
 
 

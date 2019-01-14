@@ -4,22 +4,29 @@ import Score from './Score'
 import { withRouter } from 'react-router-dom'
 import { getFlashcard } from '../store/action/flashCardAction'
 import { connect } from 'react-redux'
+import { getCurrentUser} from '../store/action/userAction'
 
-class Flashcard extends React.Component{
+class Flashcard extends React.PureComponent{
   state={
     score: 0,
     wrong: 0,
     input: React.createRef()
   }
   componentDidMount = () => {
-    this.props.getFlashcard()
+
+    let token = localStorage.getItem('token')
+    if (token){
+      // this.props.getCurrentUser(token)
+      this.props.getFlashcard()
+    } else {
+      this.props.history.push('/homepage')
+    }
   }
 
 
   handleInput = (e) => {
     e.preventDefault()
     let all = this.props.activity.map(word => word.question.toLowerCase())
-    console.log(all)
     if (all.includes(this.state.input.current.value.toLowerCase())){
       this.setState({
         score: Number(this.state.score)+10
@@ -105,9 +112,7 @@ class Flashcard extends React.Component{
   render(){
     let idx = Math.floor(Math.random() * this.props.activity.length);
     let game = this.props.activity[idx];
-    console.log(this.props.user)
-
-
+    console.log(game)
     return(
       <div>
         <Nav user={this.props.user} />
@@ -118,7 +123,7 @@ class Flashcard extends React.Component{
           {game ? this.speak(`spell ${game.question}`) : 'null'}
           <center><h1>{game ? game.question : null}</h1></center>
           <center><form  onSubmit={this.handleInput} >
-          <input type='text' ref={this.state.input} />
+          <input placeholder="type answer here" type='text' ref={this.state.input} />
           <br />
           <button class="ui yellow button" type="submit" >Submit</button>
           </form></center>
@@ -134,7 +139,8 @@ class Flashcard extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      getFlashcard: () => dispatch((dispatch) => (getFlashcard(dispatch)))
+    getCurrentUser: () => dispatch((token)=>(getCurrentUser(dispatch, token))),
+    getFlashcard: () => dispatch((dispatch) => (getFlashcard(dispatch)))
   }
 }
 

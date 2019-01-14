@@ -1,5 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { clearUser } from '../store/action/userAction'
+import { connect } from 'react-redux'
 
 class Nav extends React.Component{
 
@@ -7,6 +9,13 @@ class Nav extends React.Component{
      e.preventDefault()
      this.props.history.push('/ParentPortal')
    }
+
+   logout = () => {
+     localStorage.removeItem("token")
+     this.props.logout()
+     this.props.history.push('/homepage')
+   }
+
   render(){
     return (
       <div>
@@ -22,8 +31,8 @@ class Nav extends React.Component{
         </a>
         </li>
         <li>
-          <a href="login" className="log" onClick={this.props.handleLogClick} >
-            {this.props.user ? <img src="https://images.cooltext.com/5233419.png" alt="" /> : <img src="https://images.cooltext.com/5233390.png" alt="" />}
+          <a className="log"  >
+            {this.props.user ? <img onClick={this.logout} src="https://images.cooltext.com/5233419.png" alt="" /> : <img onClick={this.props.handleLogClick} src="https://images.cooltext.com/5233390.png" alt="" />}
           </a>
         </li>
         </ul>
@@ -31,6 +40,10 @@ class Nav extends React.Component{
     )
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(clearUser())
+  }
+}
 
-
-export default withRouter(Nav)
+export default withRouter(connect(null, mapDispatchToProps)(Nav))

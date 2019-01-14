@@ -45,6 +45,7 @@ li a {
   background-color: white;
   opacity: 0.6;
 }
+
 .main-wrap{
   width: 100%;
   margin-top: -8%;
@@ -74,13 +75,15 @@ li a {
 .user{
   float: right;
   padding: 4%;
+  padding-top: 4%;
   margin-left: 2%;
   margin-right: 10%;
-  margin-top: 4%;
+  margin-top: 10%;
   border: solid;
   border-color: #f4d64e;
   background-color: white;
   border-radius: 5%;
+  /* opacity: 0.9; */
 }
 .user h2{
   text-align: center;
@@ -88,6 +91,7 @@ li a {
   border-color: #f4d64e;
   border-radius: 5%;
   padding: 10px;
+  margin-bottom: 20%;
 }
 .user img{
   border: solid;
@@ -105,7 +109,7 @@ li a {
 }
 .score-card h3{
   color: white;
-  margin-left: 20%;
+  margin-left: 22%;
   font-size: 50px;
   text-shadow: #f4d64e 1px 1px 5px;
 }
@@ -116,13 +120,15 @@ li a {
 .pick{
   padding: 2%;
   font-family: 'Open Sans', sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   color: white;
   text-shadow: black 3px 3px 5px
 }
 
 .ui.segment.second{
   /* box-shadow: grey 3px 3px 8px; */
+  background-color: white;
+  opacity: 0.9;
   border: solid;
   border-color: #f4d64e;
   border-radius: 5%;
@@ -145,14 +151,13 @@ li a {
   padding-left: 450px;
 }
 .portal-container{
-  width: 1300px;
-  height: 800px;
-  margin-top: 25px;
+  width: 1100px;
+  height: 600px;
+  margin-top: 140px;
   margin-bottom: 45px;
-  margin-left: 140px;
+  margin-left: 250px;
   margin-right: 140px;
-  background-color: white;
-  opacity: 0.7;
+
   text-align: center;
 }
 .portal-option a{
@@ -162,15 +167,28 @@ li a {
   padding-right: 50px;
   display: inline-block;
 }
-.left{
-  float: left;
-  text-align: left;
-  margin-top: 90px;
-  margin-left: 350px;
+.img-page{
+  width: 60%;
+  background-color: white;
+  padding: 10%;
+  margin-left: 17%;
+  margin-top: 3%;
+  margin-right: 30%;
+  border-radius: 5%;
+  border-color: #f4d64e;
+  border-style: groove;
 }
-.right{
-  float: right;
-  margin-top: 90px;
-  margin-right: 350px;
-  text-align: left;
+.img-page h2{
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.img-page iframe{
+  margin: 0 auto 40px 70px;
+}
+.activity input[type=text] {
+  border: none;
+  border-bottom: 3px solid #f4d64e;
+}
+.portal-container h1{
+  padding-top: 3%;
 }

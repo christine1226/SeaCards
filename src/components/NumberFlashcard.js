@@ -4,6 +4,7 @@ import Score from './Score'
 import { getNumberFlashcard } from '../store/action/flashCardAction'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getCurrentUser} from '../store/action/userAction'
 
 class NumberFlashcard extends React.Component{
   state={
@@ -12,7 +13,12 @@ class NumberFlashcard extends React.Component{
   }
 
   componentDidMount = () => {
-    this.props.getNumberFlashcard()
+    let token = localStorage.getItem('token')
+    if (token){
+      this.props.getNumberFlashcard()
+    } else {
+      this.props.history.push('/homepage')
+    }
   }
 
   click = () => {
@@ -20,6 +26,7 @@ class NumberFlashcard extends React.Component{
   }
 
   score = (e,response) => {
+    console.log(response)
     e.preventDefault()
     let all = this.props.activity.map(word => word.question)
     if (all.includes(response)){
@@ -134,7 +141,7 @@ class NumberFlashcard extends React.Component{
         <center><img img height='400px' width='400px' src={game ? game.img_url : null } /></center>
         {game ? this.speak(`say ${game.question}`) : 'null'}
         <center>
-        <button onClick={this.listen} >Speak</button>
+        <button class="ui green button" onClick={this.listen} >Speak</button>
         <br />
         <button onClick={this.finish} class="ui yellow button" type="submit" >Submit</button>
         </center>
@@ -149,7 +156,8 @@ class NumberFlashcard extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      getNumberFlashcard: () => dispatch((dispatch) => (getNumberFlashcard(dispatch)))
+    getCurrentUser: () => dispatch((token)=>(getCurrentUser(dispatch, token))),
+    getNumberFlashcard: () => dispatch((dispatch) => (getNumberFlashcard(dispatch)))
   }
 }
 

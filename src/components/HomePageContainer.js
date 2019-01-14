@@ -1,10 +1,21 @@
 import React from 'react'
 import Nav from './Nav'
 import Signup from './Signup'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { getCurrentUser} from '../store/action/userAction'
 
-export default class HomePageContainer extends React.Component{
+class HomePageContainer extends React.Component{
   state={
     logClick: false,
+  }
+
+  componentDidMount = () => {
+    let token = localStorage.getItem('token')
+    if (token){
+      this.props.getCurrentUser(token)
+      this.props.history.push('/activity')
+    }
   }
 
   handleLogClick = (e) => {
@@ -28,3 +39,9 @@ export default class HomePageContainer extends React.Component{
   }
 
 }
+const mapDispatchToProps = (dispatch) => {
+  return{
+    getCurrentUser: () => dispatch((token)=>(getCurrentUser(dispatch, token)))
+  }
+}
+export default withRouter(connect(null, mapDispatchToProps)(HomePageContainer))
