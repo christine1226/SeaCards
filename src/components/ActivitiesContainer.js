@@ -32,7 +32,6 @@ class ActivitiesContainer extends React.Component{
 }
 
   render(){
-    console.log(localStorage, this.props.user)
     return(
       <div>
 

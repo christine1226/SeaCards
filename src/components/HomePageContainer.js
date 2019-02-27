@@ -31,7 +31,7 @@ class HomePageContainer extends React.Component{
         <Nav handleLogClick={this.handleLogClick} />
         <center><img alt="" className="header" src="https://images.cooltext.com/5233365.png" /></center>
         <div className="home-wrap">
-          <img src='active.png' />
+          <img src='active.png' alt="" />
         </div>
         {this.state.logClick && <Signup SignupSubmit={this.props.signupSubmit} />}
       </div>

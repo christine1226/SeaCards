@@ -9,41 +9,56 @@ import { getCurrentUser} from '../store/action/userAction'
 class NumberFlashcard extends React.Component{
   state={
     score: 0,
-    wrong: 0
+    wrong: 0,
+    flashcard: []
   }
 
   componentDidMount = () => {
     let token = localStorage.getItem('token')
     if (token){
       this.props.getNumberFlashcard()
+      this.currentFlashcard()
     } else {
       this.props.history.push('/homepage')
     }
   }
 
   click = () => {
-    this.props.history.push('/number')
+    this.currentFlashcard()
   }
 
-  score = (e,response) => {
-    console.log(response)
+  currentFlashcard = () => {
+    setTimeout(() => {
+     console.log('Our data is fetched');
+     let idx = Math.floor(Math.random() * this.props.activity.length);
+     let game = this.props.activity[idx];
+     this.setState({
+       flashcard: game
+     })
+   }, 1000)
+
+  }
+
+  handleInput = (e, prevState, resp) => {
     e.preventDefault()
-    let all = this.props.activity.map(word => word.question)
-    if (all.includes(response)){
-      this.speak('great job')
+    console.log(prevState)
+    if (prevState.flashcard.question === resp){
       this.setState({
         score: Number(this.state.score)+10
       })
-      alert('Correct answer for: ' + response)
-      setTimeout = (() => {this.props.history.push('/number')}, 10000)
+      this.speak('great job')
+      alert('Correct answer for: ' + resp)
+      // this.props.history.push('/flashcard')
+      this.currentFlashcard()
+
     } else {
       e.preventDefault()
-      this.speak('lets try another word')
       this.setState({
         wrong: Number(this.state.wrong)+1
       })
+      this.speak('lets try another word')
       alert('youll get the next one 😕')
-      setTimeout = (() => {this.props.history.push('/number')}, 10000)
+      this.currentFlashcard()
     }
   }
 
@@ -122,24 +137,23 @@ class NumberFlashcard extends React.Component{
       console.log(resp)
       if(e.results[0].isFinal){
         recognition.stop()
-        this.score(e, resp)
+        this.setState({
+          input: resp
+        }, this.handleInput(e, this.state, resp))
       }
     }
   }
 
 
   render(){
-    let idx = Math.floor(Math.random() * this.props.activity.length);
-    let game = this.props.activity[idx];
-    console.log(game)
     return(
       <div>
       <Nav user={this.props.user} />
       <div className='activity'>
         <Score score={this.state.score} />
         <div className="game-card">
-        <center><img img height='400px' width='400px' src={game ? game.img_url : null } /></center>
-        {game ? this.speak(`say ${game.question}`) : 'null'}
+        <center><img img height='400px' width='400px' src={this.state.flashcard ? this.state.flashcard.img_url : null } /></center>
+        {this.state.flashcard ? this.speak(`say ${this.state.flashcard.question}`) : 'null'}
         <center>
         <button class="ui green button" onClick={this.listen} >Speak</button>
         <br />

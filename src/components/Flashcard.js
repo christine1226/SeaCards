@@ -10,7 +10,8 @@ class Flashcard extends React.PureComponent{
   state={
     score: 0,
     wrong: 0,
-    input: React.createRef()
+    input: '',
+    flashcard: []
   }
   componentDidMount = () => {
 
@@ -18,23 +19,38 @@ class Flashcard extends React.PureComponent{
     if (token){
       // this.props.getCurrentUser(token)
       this.props.getFlashcard()
+
+      this.currentFlashcard()
     } else {
       this.props.history.push('/homepage')
     }
   }
 
+  currentFlashcard = () => {
+    setTimeout(() => {
+     console.log('Our data is fetched');
+     let idx = Math.floor(Math.random() * this.props.activity.length);
+     let game = this.props.activity[idx];
+     this.setState({
+       flashcard: game
+     })
+   }, 1000)
 
-  handleInput = (e) => {
+  }
+
+
+  handleInput = (e, prevState) => {
     e.preventDefault()
-    let all = this.props.activity.map(word => word.question.toLowerCase())
-    if (all.includes(this.state.input.current.value.toLowerCase())){
+    console.log(prevState)
+    if (prevState.flashcard.question === prevState.input || prevState.flashcard.question.toLowerCase() === prevState.input){
       this.setState({
         score: Number(this.state.score)+10
       })
       this.speak('great job')
-      alert('Correct answer for: ' + this.state.input.current.value)
-      this.props.history.push('/flashcard')
-      this.state.input.current.value = ''
+      alert('Correct answer for: ' + prevState.input)
+      // this.props.history.push('/flashcard')
+      this.currentFlashcard()
+      this.state.input = ''
     } else {
       e.preventDefault()
       this.setState({
@@ -42,8 +58,9 @@ class Flashcard extends React.PureComponent{
       })
       this.speak('lets try another word')
       alert('youll get the next one 😕')
-      this.state.input.current.value = ''
-      this.props.history.push('/flashcard')
+      this.state.input = ''
+      // this.props.history.push('/flashcard')
+      this.currentFlashcard()
     }
   }
   // return voice.name === 'Melina';
@@ -106,27 +123,34 @@ class Flashcard extends React.PureComponent{
 
 
   click = () => {
-    this.props.history.push('/flashcard')
+    // this.props.history.push('/flashcard')
+    this.currentFlashcard()
+  }
+
+  change = (e) => {
+    e.preventDefault()
+    this.setState({
+      input: e.target.value
+    })
   }
 
   render(){
-    let idx = Math.floor(Math.random() * this.props.activity.length);
-    let game = this.props.activity[idx];
-    console.log(game)
+    console.log(this.state.flashcard)
     return(
       <div>
         <Nav user={this.props.user} />
         <div className='activity'>
           <Score score={this.state.score} />
           <div className="game-card">
-          <center><img img height='400px' width='400px' src={game ? game.img_url : null } /></center>
-          {game ? this.speak(`spell ${game.question}`) : 'null'}
-          <center><h1>{game ? game.question : null}</h1></center>
-          <center><form  onSubmit={this.handleInput} >
-          <input placeholder="type answer here" type='text' ref={this.state.input} />
+          <center><img img height='400px' width='400px' src={this.state.flashcard ? this.state.flashcard.img_url : null } alt="" /></center>
+          {this.state.flashcard ? this.speak(`spell ${this.state.flashcard.question}`) : 'null'}
+          <center><h1>{this.state.flashcard ? this.state.flashcard.question : null}</h1></center>
+          <center><form  onSubmit={(e) => this.handleInput(e, this.state)} >
+          <input placeholder="type answer here" type='text' value={this.state.input} onChange={this.change}/>
           <br />
           <button class="ui yellow button" type="submit" >Submit</button>
           </form></center>
+
           <center><button class="ui yellow button second" onClick={this.click}>Next</button>
           <button class="ui yellow button second" onClick={this.finished}>Done</button></center>
           </div>

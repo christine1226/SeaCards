@@ -1,7 +1,6 @@
 import React from 'react'
 import Nav from './Nav'
 import { connect } from 'react-redux'
-import { CloudinaryContext} from 'cloudinary-react';
 import { getCurrentUser} from '../store/action/userAction'
 
 class ImgUpdate extends React.Component{
@@ -56,7 +55,7 @@ class ImgUpdate extends React.Component{
         <Nav user={this.props.user} />
         <div className="img-page">
           <h2>Hi, {this.props.user.user.child_username}! Click the green button to add a new picture!</h2>
-          <iframe src="https://giphy.com/embed/3oEdvdEl6fCc53I0Za" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+          <iframe title="s" src="https://giphy.com/embed/3oEdvdEl6fCc53I0Za" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
           {this.showWidget}
           <center><button class="ui green button" onClick={()=> this.showWidget(widget)}>Click to upload photo </button></center>
         </div>

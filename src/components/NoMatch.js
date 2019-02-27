@@ -18,7 +18,7 @@ class NoMatch extends React.Component{
   render(){
     return(
       <div className="img-page">
-        <h2>Theres nothing here 😕</h2>
+        <h2>Theres nothing here </h2>
         <center><button className="ui red button" onClick={this.clicked}>Go Back</button></center>
       </div>
     )
