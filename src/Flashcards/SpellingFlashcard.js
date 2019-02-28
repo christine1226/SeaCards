@@ -1,12 +1,12 @@
 import React from 'react'
-import Nav from './Nav'
+import Nav from '../components/Nav'
 import Score from './Score'
 import { withRouter } from 'react-router-dom'
 import { getFlashcard } from '../store/action/flashCardAction'
 import { connect } from 'react-redux'
 import { getCurrentUser} from '../store/action/userAction'
 
-class Flashcard extends React.PureComponent{
+class SpellingFlashcard extends React.PureComponent{
   state={
     score: 0,
     wrong: 0,
@@ -171,4 +171,4 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return  {user: state.user.user, activity: state.activity.activity}
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Flashcard))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpellingFlashcard))

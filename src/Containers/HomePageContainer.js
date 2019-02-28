@@ -1,6 +1,6 @@
 import React from 'react'
-import Nav from './Nav'
-import Signup from './Signup'
+import Nav from '../components/Nav'
+import Signup from '../Signup/Signup'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getCurrentUser} from '../store/action/userAction'

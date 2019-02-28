@@ -3,15 +3,15 @@ import './App.css';
 import '/Users/christinescomputer/Documents/big-title/node_modules/semantic-ui/dist/semantic.min.css'
 import { Route, Switch, BrowserRouter as Router} from 'react-router-dom'
 import { connect } from 'react-redux'
-import HomePageContainer from './HomePageContainer'
-import ActivitiesContainer from './ActivitiesContainer'
-import Flashcard from './Flashcard'
-import Login from './Login'
-import Signup from './Signup'
-import ParentPortal from './ParentPortal'
+import HomePageContainer from '../Containers/HomePageContainer'
+import ActivitiesContainer from '../Containers/ActivitiesContainer'
+import SpellingFlashcard from '../Flashcards/SpellingFlashcard'
+import Login from '../Signup/Login'
+import Signup from '../Signup/Signup'
+import ParentPortal from '../Containers/ParentPortal'
 import ImgUpdate from './ImgUpdate'
-import NumberFlashcard from './NumberFlashcard'
-import SpeechFlashcard from './SpeechFlashcard'
+import NumberFlashcard from '../Flashcards/NumberFlashcard'
+import SpeechFlashcard from '../Flashcards/SpeechFlashcard'
 import NoMatch from './NoMatch'
 
 
@@ -27,7 +27,7 @@ class App extends Component {
         <Switch>
           <Route path='/homepage' component = { HomePageContainer }/>
           <Route path='/activity' component={ ActivitiesContainer }/>
-          <Route path='/flashcard' component={ Flashcard }/>
+          <Route path='/flashcard' component={ SpellingFlashcard }/>
           <Route path='/login' component={ Login }/>
           <Route path='/ParentPortal' component={ ParentPortal }/>
           <Route path='/ImgUpdate' component={ ImgUpdate }/>

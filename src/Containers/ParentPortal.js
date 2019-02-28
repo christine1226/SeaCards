@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from './Nav'
+import Nav from '../components/Nav'
 import { connect } from 'react-redux'
 import { getCurrentUser} from '../store/action/userAction'
 
@@ -115,7 +115,7 @@ class ParentPortal extends React.Component{
           </div>
           <div className="column">
           <div className="card" class="ui segment second">
-            <h1>Speech</h1>
+            <h1>Questions</h1>
             <h3>Correct Answers:</h3>
             <h3>{speech_score ? speech_score : "Not Available"}</h3>
             <h3>Wrong Answers:</h3>

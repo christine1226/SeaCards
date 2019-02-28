@@ -26,7 +26,7 @@ class ActivityCollection extends React.Component{
         <div class="column">
           <div onClick={this.props.onclick} className="card" class="ui segment second">
             <center><img height="240" width="240" alt="speech" src="https://media.giphy.com/media/NfpzZFtEECnYc/giphy.gif" /></center>
-            <center><h3>Speech</h3></center>
+            <center><h3>Questions</h3></center>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from './Nav'
+import Nav from '../components/Nav'
 import Score from './Score'
 import { getSpeechFlashcard } from '../store/action/flashCardAction'
 import { withRouter } from 'react-router-dom'
@@ -42,7 +42,8 @@ class SpeechFlashcard extends React.Component{
 
   handleInput = (e, prevState, resp) => {
     e.preventDefault()
-    if (prevState.flashcard.question === resp){
+    console.log(prevState.flashcard.ques, resp)
+    if (prevState.flashcard.answer === resp || prevState.flashcard.answer.toLowerCase() === resp){
       this.setState({
         score: Number(this.state.score)+10
       })
@@ -146,6 +147,7 @@ class SpeechFlashcard extends React.Component{
 
 
   render(){
+    console.log(this.state.flashcard)
     return(
       <div>
       <Nav user={this.props.user} />

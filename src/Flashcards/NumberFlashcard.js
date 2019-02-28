@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from './Nav'
+import Nav from '../components/Nav'
 import Score from './Score'
 import { getNumberFlashcard } from '../store/action/flashCardAction'
 import { withRouter } from 'react-router-dom'
